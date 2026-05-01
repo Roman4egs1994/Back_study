@@ -17,7 +17,7 @@ export const VideoInputDtoValidation = (data: CreateVideoDto): ValidationError[]
             message: 'Title is required and must be less than 40 characters'
         });
     }
-
+   //
     if (!data.author || typeof data.author !== 'string' || data.author.trim().length > 20) {
         errors.push({
             field: 'author',
