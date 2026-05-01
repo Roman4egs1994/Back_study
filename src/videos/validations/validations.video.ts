@@ -8,7 +8,7 @@ export type CreateVideoDto = {
     minAgeRestriction?: number | null;
 }
 
-export const VideoInputDtoValidation = (data: CreateVideoDto): ValidationError[] => {
+export const VideoInputDtoValidation = (data: any): ValidationError[] => {
     const errors: ValidationError[] = [];
 
     if (!data.title || typeof data.title !== 'string' || data.title.trim().length > 40) {
@@ -27,7 +27,7 @@ export const VideoInputDtoValidation = (data: CreateVideoDto): ValidationError[]
 
     if (data.availableResolutions && Array.isArray(data.availableResolutions)) {
         const validResolutions = ['P144', 'P240', 'P360', 'P480', 'P720', 'P1080', 'P1440', 'P2160'];
-        const invalidResolutions = data.availableResolutions.filter(res => !validResolutions.includes(res));
+        const invalidResolutions = data.availableResolutions.filter((res: string) => !validResolutions.includes(res));
 
         if (invalidResolutions.length > 0) {
             errors.push({
