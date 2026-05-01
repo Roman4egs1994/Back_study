@@ -2,10 +2,11 @@
 
 export enum HttpStatusesEnum {
     Content = 200,
-    NoContent = 404,
-    NotFound = 404,
+    Created = 201,
+    NoContent = 204,
     BadRequest = 400,
     Unauthorized = 401,
     Forbidden = 403,
+    NotFound = 404,
     InternalServerError = 500
 }

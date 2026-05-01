@@ -4,6 +4,7 @@ export type CreateVideoDto = {
     title: string;
     author: string;
     availableResolutions?: string[];
+    canBeDownloaded?: boolean;
 }
 
 export const VideoInputDtoValidation = (data: CreateVideoDto): ValidationError[] => {
@@ -26,13 +27,20 @@ export const VideoInputDtoValidation = (data: CreateVideoDto): ValidationError[]
     if (data.availableResolutions && Array.isArray(data.availableResolutions)) {
         const validResolutions = ['P144', 'P240', 'P360', 'P480', 'P720', 'P1080', 'P1440', 'P2160'];
         const invalidResolutions = data.availableResolutions.filter(res => !validResolutions.includes(res));
-        
+
         if (invalidResolutions.length > 0) {
             errors.push({
                 field: 'availableResolutions',
                 message: `Invalid resolutions: ${invalidResolutions.join(', ')}`
             });
         }
+    }
+
+    if (typeof data.canBeDownloaded !== 'undefined' && typeof data.canBeDownloaded !== 'boolean') {
+        errors.push({
+            field: 'canBeDownloaded',
+            message: 'canBeDownloaded must be a boolean'
+        });
     }
 
     return errors;
