@@ -5,6 +5,7 @@ export type CreateVideoDto = {
     author: string;
     availableResolutions?: string[];
     canBeDownloaded?: boolean;
+    minAgeRestriction?: number | null;
 }
 
 export const VideoInputDtoValidation = (data: CreateVideoDto): ValidationError[] => {
@@ -36,11 +37,20 @@ export const VideoInputDtoValidation = (data: CreateVideoDto): ValidationError[]
         }
     }
 
-    if (typeof data.canBeDownloaded !== 'undefined' && typeof data.canBeDownloaded !== 'boolean') {
+    if (data.canBeDownloaded !== undefined && typeof data.canBeDownloaded !== 'boolean') {
         errors.push({
             field: 'canBeDownloaded',
             message: 'canBeDownloaded must be a boolean'
         });
+    }
+
+    if (data.minAgeRestriction !== undefined && data.minAgeRestriction !== null) {
+        if (data.minAgeRestriction < 1 || data.minAgeRestriction > 18) {
+            errors.push({
+                field: 'minAgeRestriction',
+                message: 'minAgeRestriction must be a number between 1 and 18'
+            });
+        }
     }
 
     return errors;
