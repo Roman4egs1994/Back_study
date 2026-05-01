@@ -4,8 +4,8 @@ import {testingRoutes} from "./testing/routes/testing.routes";
 
 export const setupApp = (app: Express) => {
     app.use(express.json());
-    app.use("/hometask_01/api/videos", videosRoutes);
-    app.use("/hometask_01/api/testing", testingRoutes)
+    app.use("/videos", videosRoutes);
+    app.use("/testing", testingRoutes)
 
    return app;
 };
