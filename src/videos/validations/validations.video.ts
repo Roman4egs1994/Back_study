@@ -53,5 +53,12 @@ export const VideoInputDtoValidation = (data: any): ValidationError[] => {
         }
     }
 
+    if (data.publicationDate !== undefined && typeof data.publicationDate !== 'string') {
+        errors.push({
+            field: 'publicationDate',
+            message: 'publicationDate must be a string in ISO format'
+        });
+    }
+
     return errors;
 };
