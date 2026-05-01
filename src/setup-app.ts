@@ -7,5 +7,6 @@ export const setupApp = (app: Express) => {
     app.use("/videos", videosRoutes);
     app.use("/testing", testingRoutes)
 
+
    return app;
 };
